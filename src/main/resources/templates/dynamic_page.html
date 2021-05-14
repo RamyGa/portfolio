@@ -1,0 +1,443 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en-US">
+
+<head th:replace="fragments :: head"></head>
+
+<!--<script type="text/javascript" th:src="@{/sh/scripts/codebase.js}"></script>-->
+
+<body>
+
+
+<!--Hello, thanks for checking out my site! Feel free to see what I've done under the hood! -->
+
+<form id="myForm" role="form" method="GET" action="dynamic_page">
+
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p class="paragraph" id="header_par_id">
+                        How is the header being displayed on the page? <br>
+                        <img class="img-fluid" th:src="@{img/code-snippit-1.png}" alt=""><br>
+                        The first class that is being used is Bootstrap’s .container-fluid class which provides
+                        a full-width container that will span the entire width of the viewport regardless of the
+                        size of the device. The .row class allows for the use of column classes to separate between
+                        the right and left sides of the page. The &lt;section&gt; tag, which itself is using some Bootstrap
+                        style classes and has &lt;h1&gt; and &lt;p&gt; tags embedded within it, reside inside the right column.
+                        This is how the header and paragraph are displayed on the right side of the page.<br>
+
+                        For more details about this project check out my github!
+                    </p>
+
+                    <p class="paragraph" id="certificate_par_id">
+                        The images that contain the class .myImg, like this one, will use JavaScript in the background
+                        to handle any events, such as 'click' events. When images containing this class, such as this image,
+                        are clicked, the popup’s CSS display property is set to block, allowing the popup containing the image
+                        to appear on the page. CSS also handles <em>how</em> the image is displayed on the page. For example, CSS is used
+                        to darken the background and ensure that everything is positioned correctly. <br><br>
+                        Here's the HTML/Bootstrap that handles the modal:<br>
+                        <img class="img-fluid" th:src="@{img/html_bootstrap_modal.png}" alt=""><br><br>
+                        Here's the JavaScript that handles the modal:<br>
+                        <img class="img-fluid" th:src="@{img/js_modal.png}" alt=""><br><br>
+                        For more details about this project check out my GitHub!
+                    </p>
+
+                    <p class="paragraph" id="whathappened_json_par_id">
+                        When the button is clicked, we submit the data in the form, the form data gets
+                        handled by the 'dynamic_page_json' handler. This is all taken care of with the
+                        help of spring via the controller. The POST controller at the 'dynamic_page_json'
+                        end point will take the data served up to us via the @RequestParam annotation.
+                        With the String data at hand we send that data to the private 'formData' variable
+                        to then be accessed and applied to the JsonDataDTO object. The 'path_variable' GET
+                        handler takes care of object creation, and supplying a counter as well as the data
+                        from the form, then returning that data as json.
+                        We use the @ResponseBody for that very reason, we dont want to return an actual html
+                        page, like we have been doing, only json.
+                        Here is the java/spring GET/POST handlers:<br>
+                        <img class="img-fluid" th:src="@{img/get_post_json.png}" alt=""><br>
+                        For more details about this project check out my github!
+                    </p>
+
+                    <p class="paragraph" id="whathappened_mysql_par_id">
+                        paragraph for the what happened behind the scenes button for mySQL return
+                        After filling the form and hitting 'Send data to database!', the data gets
+                        taken to the controller and handled via the 'dynamicPagePostMethodForMySql'
+                        method, which handles the POST request. The data is applied to the Object
+                        'mySqlDataEntity' who's constructor requires the two String pieces of data.
+                        The object then gets saved to the Database. The data gets saved to a MySQL
+                        database which also uses AWS RDS Web service to store the data. Here's
+                        the data in the MySQL database:<br>
+                        <img class="img-fluid" th:src="@{img/database.png}" alt=""><br>
+                        Once the data is saved we query the database using the name provided and with
+                        the help of Spring Data JPA. We then create an ObjectMapper object to be
+                        able to return the data as a String. Here's what that looks like:<br>
+                        <img class="img-fluid" th:src="@{img/save_data_controller.png}" alt=""><br>
+                        What would usually happen is the page
+                        would refresh and data would be sent to the html page via a GET request
+                        and with the help of a template engine like thymeleaf. We would use the data
+                        being sent back from the server pass it into a model.addAttribute(),and use
+                        thymeleaf 'th:text' attributes to display the data in the view. The issue
+                        with this approach is that it doesnt help in providing a good user experience.
+                        So for us to solve this problem we use Ajax and middle man, when the POST
+                        request is made Ajax takes over and asynchronously fetches the data and
+                        updates the data at a given tag in the html, all without having to reload the
+                        whole page! So when the data from the controller gets returned in String format
+                        we use JSON.parse() method to handle the parsing so we can access the data in
+                        the jQuery. Here's what that looks like:<br>
+                        <img class="img-fluid" th:src="@{img/ajax.png}" alt=""><br>
+                        As you see the first thing that happens is for us to prevent the normal
+                        occurrence of what would happen when a form is submitted (which is to
+                        reload the page) we stop this event from occurring with 'e.preventDefault();'
+                        , the data being passed in as the response needs to be looped over
+                        and appended to the html tags where they would reside, which is what happens
+                        here with the referenced html tags.
+
+                        For more details about this project check out my github!
+
+
+
+                    </p>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="left-menu"> <!-- custom css-->
+    <div class="container-fluid full-height">
+        <div class="row text-center  full-height align-items-center">
+            <!--will align headshot row center horizontal and align-items-center will align vertically-->
+            <div class="col">
+
+                <hr class="style14">
+
+                <h5 class="mt-4 text-light">Front-end</h5>
+                <ul class="mt-3 text-light list-unstyled">
+                    <li id="css">CSS</li>
+                    <li id="html">HTML</li>
+                    <li id="javascript">JavaScript</li>
+                    <li id="ajax">Ajax</li>
+                    <li id="jquery">jQuery</li>
+                </ul>
+                <hr class="style14 mt-4">
+                <h5 class="mt-4 text-light">Back-end</h5>
+                <ul class="mt-3 text-light list-unstyled">
+                    <li id="java">Java</li>
+                    <li id="sql">SQL & AWS</li>
+                </ul>
+                <hr class="style14 mt-4">
+                <h5 class="mt-4 text-light">Frameworks</h5>
+                <ul class="mt-3 text-light list-unstyled">
+                    <li id="spring">Spring Boot</li>
+                    <li id="thymeleaf">Thymeleaf</li>
+                    <li id="bootstrap">Bootstrap</li>
+                </ul>
+                <hr class="style14">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid"> <!--container-fluid will take the whole width available -->
+    <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-9 panel-right"> <!-- all the content on the right -->
+            <div th:replace="fragments::nav_bar"></div>
+            <section class="bg-light p-5 rounded-lg m-3">
+
+                <div>
+                    <img id="ramys_port_click" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                         class="img-fluid pulse size click_here" th:src="@{img/clickhere.png}" alt="">
+                    <h1 id="r-portfolio" class="display-4">Ramy's Portfolio Explained</h1>
+                </div>
+
+                <p class="lead">
+                    Welcome to the more technical side of my portfolio! On this page, I wanted to demonstrate my
+                    understanding of what exactly goes into a dynamic web application. I’ve added some things you’ve
+                    already seen on the index page, like the header and a certificate (Click on the blue icons beside those
+                    elements to explore their behind the scenes functionality). I’ve also added some demonstrations that
+                    showcase databases, frameworks, and MVC.
+                </p>
+
+
+
+                <div class="row text-center align-items-center full-height">
+                    <!--will align headshot row center horizontal and align-items-center will align vertically-->
+                    <div class="col">
+                        <a class=" btn btn-dark btn-lg " href="#" role="button">Github</a>
+                        <a class=" btn btn-primary btn-lg " href="#" role="button">Linkedin</a>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <section class="blog mt-5">
+                <h2 id="education" class="display-6 mb-5 ">JS, HTML, CSS, Bootstrap:</h2>
+                <div class="container-fluid  ">
+                    <div class="row gy-4">
+
+                        <div class=" col-lg-4 ">
+                            <img id="certificate_click" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                                 class="img-fluid pulse size-child float-left click_here" th:src="@{img/clickhere.png}"
+                                 alt=""><br>
+
+                            <row class="row ">
+
+                                <p class="titleVisibleTrue text-center"><small>University of Arkansas HTML-CSS <br>certificate of
+                                    completion</small>
+                                    <img id="certificate" class="myImg center green_hover "
+                                         th:src="@{/img/htmlcssintrocertificate.png}" alt="html/css">
+                                </p>
+
+
+
+
+                            </row>
+
+                        </div> <!-- image-wrapper -->
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+            <section class="blog mt-5">
+                <h2 id="experience" class="display-6 mb-5">Spring Boot & REST:</h2>
+                <div class="container-fluid ">
+                    <div class="row gy-4"> <!-- gy-4 will give the gap in between the cards -->
+                        <div class="col-sm-8">
+
+
+                            <h4 class="display-8">RESTful Web Service & Spring</h4>
+
+                            <p>
+                                Quick overview on REST: What does it mean to have a RESTful web service,
+                                and how does Spring Boot help us in making our application RESTful?
+
+                            <ul>
+                                (In a nut shell)
+                                <li>
+                                    REST is a convention that allows for a bit of an enhancement when it
+                                    comes to the client-server relationship. RESTful implementations use the
+                                    HTTP protocol verbs like GET, PUT, POST, and DELETE.
+                                </li>
+                                <li>
+                                    When the client sends a request our way, you can be "REST" assured that we can take
+                                    care of it on our server side. Spring helps us build RESTful services with its useful
+                                    annotations that take care of incoming requests from the client. Whether it is a GET, PUT, POST, or DELETE,
+                                    these requests are handled in the controller class (annotated with @Controller or @RestController depending
+                                    on the type of data you want returned). Simple Spring annotations can help direct request traffic to its appropriate destination.
+                                </li>
+
+                                <li>
+                                    REST is just one area where Spring/Spring-boot can make our lives as developers
+                                    easier.
+                                    There are several benefits to using this framework in our projects, like:
+                                    <ul class="square">
+                                        <li>
+                                            REST is just one area where Spring/Spring Boot can make our lives as developers easier. There are several
+                                            benefits to using this framework in our projects, for example: Spring achieves loose coupling through dependency injection
+                                            (as seen in my "Swap Me" project)
+                                        </li>
+                                        <li>
+                                            Spring reduces a lot of boilerplate code especially when it comes to ORM (Hibernate), JPA, data marshalling, validation,
+                                            and creating objects via form data (again, much of which is used in my "Swap Me" web application)
+                                        </li>
+                                        <li>
+                                            Spring removes the need of having an instance of a web server (like Apache Tomcat) installed on your machine
+                                        </li>
+                                        <li>
+                                            Spring provides support for MVC-based applications
+                                        </li>
+                                        <li>
+                                            Spring provides enterprise-level security with Spring Security
+                                        </li>
+                                        <li>
+                                            And much, much, more
+                                        </li>
+                                    </ul>
+
+                                </li>
+
+                            </ul>
+
+                            When we are using the @RestController annotation with Spring,
+                            it’s expecting to handle JSON, and return some type of status code,
+                            depending on the situation. Check it out below!
+
+                            <h6>Try it out!</h6>
+                            <form th:action="@{dynamic_page_json}" method="post" target="_blank">
+                                <div class="form-group col-lg-5">
+                                    <input id="send_post_request_id"
+                                           class="form-control green_hover"
+                                           type="text"
+                                           name="dataFromForm"
+                                           placeholder="Type something here"
+                                           required
+
+                                    >
+                                </div>
+                                <div>
+                                    <button type="submit" id="sendpost" class="btn btn-primary btn-sm mt-2 send_button " >Send post
+                                        request!
+                                    </button>
+                                    <button id="whathappened_json_id" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            class="btn btn-success btn-sm mt-2 click_here " data-bs-backdrop="static" data-bs-keyboard="false">
+                                        See what happened behind the scenes
+                                    </button>
+                                </div>
+                            </form>
+
+                            <hr class="style14">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="blog mt-5">
+                <h2 id="mysql" class="display-6 mb-5">MySQL:</h2>
+                <div class="container-fluid ">
+                    <div class="row gy-4"> <!-- gy-4 will give the gap in between the cards -->
+                        <div class="col-sm-8">
+
+
+                            <h4 class="display-8">Relational database management system (RDBMS) </h4>
+
+                            <p>
+                                Quick overview on RDBMS:
+                                A relational database is a type of database that stores data in tables, these
+                                tables can have relationships with other tables that can contain data that relate to one another.
+                                These tables are divided into rows and columns, and if we want to retrieve the data within these tables, we
+                                can use the Structured Query Language (SQL) to do just that. MySQL is one of these relational database
+                                management systems, which is a very popular one and happens to also be open source.
+
+
+                            <ul>
+
+                            <li>
+                                Here are few reasons why mySQL is so great:
+                                <ul class="square">
+                                    <li>Data security, data security is so good with mySQL that even tech giants like Amazon and Twitter rely on it </li>
+                                    <li>Scalability, mySQL automatic sharding (partitioning) to scale horizontally, & customization for unique database server requirements   </li>
+                                    <li>Extremely easy to use and set up (about 30 min or less) </li>
+                                    <li>High performance, mySQL provides "Full-text indexing" (able to find data in a table without having to
+                                        scan rows & columns)
+                                    </li>
+                                    <li>And much more</li>
+                                </ul>
+                            </li>
+
+                            </ul>
+
+                            I've implemented a simple mySQL database below, just type in the data required below and see it being stored
+                            in the database, queried, then being sent back and displayed for you to see. (Ajax being used so no need for page
+                            reload)
+
+                            <h6>Try it out!</h6>
+                            <form th:action="@{save_data}" method="post" id="form">
+
+                                <div class="row">
+                                    <div class="col-sm-5">
+
+                                        <input id="enter_name_id"
+                                               class="form-control input-sm green_hover"
+                                               type="text"
+                                               name="name"
+                                               placeholder="Enter your name"
+                                               required>
+                                    </div>
+                                    <div class="col-sm-5">
+
+                                    <input id="enter_pokemon_id"
+                                               class="form-control input-sm green_hover "
+                                               type="text"
+                                               name="fav_pokemon"
+                                               placeholder="Enter favorite pokemon"
+                                               required>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <div>
+                                    <button type="submit" id="send_to_database_id" class="btn btn-primary btn-sm mt-2 send_button ">Send data to the database!
+                                    </button>
+                                    <button id="whathappened_mysql_id" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            class="btn btn-success btn-sm mt-2 click_here " data-bs-backdrop="static" data-bs-keyboard="false">
+                                        See what happened behind the scenes
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div>
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th  scope="col">Name</th>
+                                        <th  scope="col">Favorite Pokemon</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr  id="tr_data" >
+                                            <th id="id" scope="row"></th>
+                                            <td id="name_in_list" ></td>
+                                            <td id="fav_pok" ></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <div id="postResultDiv"></div>
+                            </div>
+
+
+                            <hr class="style14">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div th:replace="fragments::email"></div>
+
+            <div th:replace="fragments::footer"></div>
+        </div>
+
+    </div>
+
+
+</div>
+<div th:replace="fragments::confirmation_modal"></div>
+<div th:replace="fragments::certificates_modal"></div>
+
+<div th:replace="fragments::scripts"></div>
+
+
+</body>
+</html>
